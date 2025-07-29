@@ -11,9 +11,9 @@ app.use(express.json());
 // Basic GET endpoint
 app.get('/', (req, res) => {
   res.json({
-    message: 'Welcome to Simple REST API',
-    status: 'success',
-    timestamp: new Date().toISOString()
+    welcome: 'Simple REST API for GPTs',
+    description: 'カスタマイズされたAPIサービスです',
+    type: 'welcome'
   });
 });
 
@@ -21,9 +21,9 @@ app.get('/', (req, res) => {
 app.get('/api/greeting', (req, res) => {
   const name = req.query.name || 'World';
   res.json({
-    message: `Hello, ${name}!`,
-    status: 'success',
-    timestamp: new Date().toISOString()
+    greeting: `Hello, ${name}!`,
+    response: `こんにちは、${name}さん！今日も良い一日を！`,
+    type: 'greeting'
   });
 });
 
@@ -32,8 +32,8 @@ app.get('/api/random', (req, res) => {
   const randomNumber = Math.floor(Math.random() * 100) + 1;
   res.json({
     number: randomNumber,
-    message: 'Random number generated',
-    status: 'success'
+    result: `生成されたランダム数値は ${randomNumber} です`,
+    type: 'random_number'
   });
 });
 
@@ -41,9 +41,9 @@ app.get('/api/random', (req, res) => {
 app.post('/api/echo', (req, res) => {
   const { message } = req.body;
   res.json({
-    echo: message || 'No message provided',
-    status: 'success',
-    timestamp: new Date().toISOString()
+    original: message || 'No message provided',
+    echo: `エコー: ${message || 'メッセージが提供されませんでした'}`,
+    type: 'echo'
   });
 });
 

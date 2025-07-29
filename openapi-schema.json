@@ -1,0 +1,164 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Simple REST API for GPTs",
+    "description": "A simple REST API that provides greeting, random numbers, and echo functionality",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://rest-test-azure.vercel.app"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getWelcome",
+        "summary": "Get welcome message",
+        "description": "Returns a welcome message with timestamp",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/greeting": {
+      "get": {
+        "operationId": "getGreeting",
+        "summary": "Get personalized greeting",
+        "description": "Returns a greeting message with optional name parameter",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name to greet",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "World"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/random": {
+      "get": {
+        "operationId": "getRandomNumber",
+        "summary": "Get random number",
+        "description": "Returns a random number between 1 and 100",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "number": {
+                      "type": "integer"
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/echo": {
+      "post": {
+        "operationId": "postEcho",
+        "summary": "Echo message",
+        "description": "Returns the same message that was sent",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message": {
+                    "type": "string",
+                    "description": "Message to echo"
+                  }
+                },
+                "required": ["message"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "echo": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "timestamp": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
